@@ -1,7 +1,10 @@
 # OpenHAB
 
 Install and configure the OpenHAB (www.openhab.org) software for Home
-Automation
+Automation on to Debian-based distros following the instructions at
+https://github.com/openhab/openhab/wiki/Linux---OS-X#apt-get
+
+Note: This will run on Rasbian as well as Ubuntu and stock Debian.
 
 ## Requirements
 
