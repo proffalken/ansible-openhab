@@ -1,0 +1,49 @@
+###
+# {{ ansible_managed }}
+###
+
+## General configurations
+folder:items=10,items
+folder:sitemaps=10,sitemap
+folder:rules=10,rules
+folder:scripts=10,script
+folder:persistence=10,persist
+
+security:option={{ openhab_security | default("OFF") }}
+security:netmask={{ openhab_netmask | default("192.168.1.0/24") }}
+persistence:default={{ openhab_default_persistence | default("rrd4j") }}
+mainconfig:refresh={{ openhab_configuration_refresh | default("-1") }}
+
+servicediscovery:bind_address={{ openhab_service_discovery_bind_address | default(ansible_default_ipv4['address']) }}
+
+################################## Chart Servlet ######################################
+chart:provider={{ openhab_chart_provider | default("rrd4j") }}
+chart:defaultHeight={{ openhab_chart_height | default("240") }}
+chart:defaultWidth={{ openhab_chart_width | default("480") }}
+chart:scale={{ openhab_chart_scale | default("1") }}
+
+
+##### Action configurations
+
+{% for action in openhab_actions %}
+########### {{ action }} ##################
+{% for acfg_item in openhab_actions[action] %}
+{{ action }}:{{ acfg_item['key'] }}={{ acfg_item['value'] }}
+{% endfor %}
+{% endfor %}
+
+##### Persistence configurations
+{% for persist in openhab_persistence %}
+########### {{ persist }} ##################
+{% for pcfg_item in openhab_persistence[persist] %}
+{{ persist }}:{{ pcfg_item['key'] }}={{ pcfg_item['value'] }}
+{% endfor %}
+{% endfor %}
+
+##### Binding configurations
+{% for binding in openhab_bindings %}
+########### {{ binding }} ##################
+{% for bcfg_item in openhab_bindings[binding] %}
+{{ binding }}:{{ bcfg_item['key'] }}={{ bcfg_item['value'] }}
+{% endfor %}
+{% endfor %}

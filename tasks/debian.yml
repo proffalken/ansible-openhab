@@ -1,0 +1,41 @@
+---
+# Debian specfic tasks for OpenHAB
+- name: Add APT Key
+  apt_key:
+    url: "https://bintray.com/user/downloadSubjectPublicKey?username=openhab"
+    state: present
+
+- name: Add the APT Repo
+  apt_repository:
+    repo: "deb http://dl.bintray.com/openhab/apt-repo stable main"
+    state: present
+
+- name: Install OpenHAB
+  apt:
+    name: openhab-runtime
+    state: present
+    update_cache: yes
+
+- name: Install OpenHAB Actions
+  apt:
+    name: "openhab-addon-action-{{ item.key }}"
+    state: present
+    update_cache: yes
+  with_dict: "{{ openhab_actions }}"
+  ignore_errors: True
+
+- name: Install OpenHAB Bindings
+  apt:
+    name: "openhab-addon-binding-{{ item.key }}"
+    state: present
+    update_cache: yes
+  with_dict: "{{ openhab_bindings }}"
+  ignore_errors: True
+
+- name: Install OpenHAB Persistence
+  apt:
+    name: "openhab-addon-persistence-{{ item.key }}"
+    state: present
+    update_cache: yes
+  with_dict: "{{ openhab_persistence }}"
+  ignore_errors: True

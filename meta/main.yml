@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Matthew Macdonald-Wallae
+  description: Install the OpenHAB Home Automation Suite
+  company:
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+     - all
+  - name: Debian
+    versions:
+     - all
+dependencies: []

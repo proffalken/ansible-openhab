@@ -1,0 +1,32 @@
+---
+# defaults file for openhab
+openhab_security: OFF
+general_net_mask: "{{ ansible_default_ipv4.network }}/{{ ansible_default_ipv4.netmask }}"
+openhab_netmask: "{{ general_net_mask | ipaddr('net') }}"
+openhab_default_persistence: rrd4j
+openhab_configuration_refresh: 5
+openhab_service_discovery_bind_address: "{{ ansible_default_ipv4['address'] }}"
+openhab_chart_provider: rrd4j
+openhab_chart_height: 240
+openhab_chart_width: 480
+openhab_chart_scale: 1
+
+## Configure your Actions here
+openhab_actions:
+  mail:
+    - { key: hostname, value: localhost }
+    - { key: port, value: 25 }
+
+## Configure Persistence here
+openhab_persistence:
+  rrd4j:
+    - { key: der5min.def, value: 'DERIVE,900,0,U,300' }
+    - { key: der5min.archives, value: 'AVERAGE,0.5,1,365:AVERAGE,0.5,7,300' }
+    - { key: der5min.items, value: 'Demo*' }
+  logging:
+    - {key: pattern, value: '%date{ISO8601} - %-25logger: %msg%n' }
+
+## Configure your Bindings here
+openhab_bindings:
+  bluetooth:
+    - { key: refresh, value: 20 }

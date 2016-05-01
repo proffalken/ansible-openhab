@@ -1,0 +1,19 @@
+---
+platforms:
+  - name: ubuntu-14.04
+    provision_command: sudo pip install netaddr
+    driver:
+      instance_type: c4.large
+    tags:
+      - Name: ubuntu-14.04-test-kitchen-openhab
+#  - name: centos-7
+#    provision_command: yum install -y rubygem-rake
+#    tags:
+#      - Name: centos-7-test-kitchen-nginx
+
+suites:
+  - name: openhab
+
+verifier:
+  sudo_command: sudo
+

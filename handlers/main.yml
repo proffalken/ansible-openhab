@@ -1,0 +1,6 @@
+---
+# handlers file for openhab
+- name: Restart OpenHAB
+  service:
+    name: openhab
+    state: restarted

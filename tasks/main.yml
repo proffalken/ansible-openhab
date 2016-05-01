@@ -1,0 +1,59 @@
+---
+# tasks file for openhab
+# include the distro-specific stuff
+- name: Include the Debian config
+  include: debian.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Use the variables to build out the configuration file
+  template:
+    src: openhab.cfg.j2
+    dest: /etc/openhab/configurations/openhab.cfg
+    owner: openhab
+    group: openhab
+
+- name: Copy in the items files
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/openhab/configurations/items/"
+    owner: openhab
+    group: openhab
+    mode: 0644
+  with_fileglob:
+    - items/*
+
+- name: Copy in the Sitemaps
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/openhab/configurations/sitemaps/"
+    owner: openhab
+    group: openhab
+    mode: 0644
+  with_fileglob:
+    - sitemaps/*
+
+- name: Copy in the Persistence Config
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/openhab/configurations/persistence/"
+    owner: openhab
+    group: openhab
+    mode: 0644
+  with_fileglob:
+    - persistence/*
+
+- name: Copy in the Rules
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/openhab/configurations/rules/"
+    owner: openhab
+    group: openhab
+    mode: 0644
+  with_fileglob:
+    - rules/*
+
+- name: Enable and start the OpenHAB service
+  service:
+    name: openhab
+    state: running
+    enabled: True
