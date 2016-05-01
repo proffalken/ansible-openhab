@@ -85,13 +85,19 @@ To run the role, create a play with the following content:
          - { role: <your_java_role> }
          - { role: openhab }
 
-License
--------
+## Contributing
+
+Fork the code, make your changes and submit a pull request.  Tests are
+available using the kitchen-ec2 plugin, however you will need to configure your
+test kitchen setup using the "Dynamic Configuration Instructions" from
+http://kitchen.ci/docs/getting-started/dynamic-configuration in order to use it
+properly.
+
+## License
 
 MIT
 
-Author Information
-------------------
+## Author Information
 
 Matthew Macdonald-Wallace
 http://doics.co
